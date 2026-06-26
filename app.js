@@ -5,7 +5,7 @@
 // ── SUPABASE CONFIG ──────────────────────────
 // Replace these with your actual Supabase credentials
 const SUPABASE_URL = 'https://zkhkfusorbpylasmitrd.supabase.co';
-const SUPABASE_ANON_KEY = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpraGtmdXNvcmJweWxhc21pdHJkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI0NzM1NDksImV4cCI6MjA5ODA0OTU0OX0.CS3W2sqLUYu4DPKnGeUYU6DjiG8IKzYo9btMSPQETpg
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpraGtmdXNvcmJweWxhc21pdHJkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI0NzM1NDksImV4cCI6MjA5ODA0OTU0OX0.CS3W2sqLUYu4DPKnGeUYU6DjiG8IKzYo9btMSPQETpg'
 
 const { createClient } = supabase;
 const db = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
