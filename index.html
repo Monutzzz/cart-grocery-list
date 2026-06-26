@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cart — Shared Grocery List</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+    <header>
+      <div class="header-inner">
+        <div class="logo">
+          <span class="logo-icon">🛒</span>
+          <span class="logo-text">Cart</span>
+        </div>
+        <div class="header-meta" id="sync-status">Connecting...</div>
+      </div>
+    </header>
+
+    <div class="store-tabs" id="store-tabs">
+      <button class="tab active" data-store="all">All</button>
+      <button class="tab tab--frys" data-store="frys">Fry's</button>
+      <button class="tab tab--costco" data-store="costco">Costco</button>
+      <button class="tab tab--sams" data-store="sams">Sam's</button>
+      <button class="tab tab--walmart" data-store="walmart">Walmart</button>
+      <button class="tab tab--other" data-store="other">Other</button>
+    </div>
+
+    <main>
+      <!-- Add Item Form -->
+      <div class="add-card">
+        <div class="input-row">
+          <input
+            type="text"
+            id="item-input"
+            placeholder="Add an item..."
+            autocomplete="off"
+            autocorrect="off"
+          />
+          <button class="btn-add" id="btn-add">Add</button>
+        </div>
+
+        <!-- Suggestions -->
+        <div class="suggestions" id="suggestions"></div>
+
+        <!-- Item details (shown after typing) -->
+        <div class="item-details" id="item-details" style="display:none">
+          <div class="details-row">
+            <div class="field-group">
+              <label>Store</label>
+              <select id="store-select">
+                <option value="frys">Fry's</option>
+                <option value="costco">Costco</option>
+                <option value="sams">Sam's Club</option>
+                <option value="walmart">Walmart</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div class="field-group">
+              <label>Category</label>
+              <select id="category-select">
+                <option value="Produce">🥦 Produce</option>
+                <option value="Dairy">🥛 Dairy</option>
+                <option value="Meat">🥩 Meat</option>
+                <option value="Bakery">🍞 Bakery</option>
+                <option value="Frozen">🧊 Frozen</option>
+                <option value="Pantry">🥫 Pantry</option>
+                <option value="Snacks">🍿 Snacks</option>
+                <option value="Beverages">🥤 Beverages</option>
+                <option value="Household">🧹 Household</option>
+                <option value="Personal Care">🧴 Personal Care</option>
+                <option value="Other">📦 Other</option>
+              </select>
+            </div>
+            <div class="field-group qty-group">
+              <label>Qty</label>
+              <div class="qty-control">
+                <button class="qty-btn" id="qty-minus">−</button>
+                <span id="qty-display">1</span>
+                <button class="qty-btn" id="qty-plus">+</button>
+              </div>
+            </div>
+          </div>
+          <div class="note-row">
+            <button class="note-toggle" id="note-toggle">+ Add note</button>
+            <input type="text" id="note-input" placeholder="e.g. get the organic one" style="display:none" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Category AI hint -->
+      <div class="ai-hint" id="ai-hint" style="display:none">
+        <span class="ai-badge">AI</span>
+        <span id="ai-hint-text"></span>
+      </div>
+
+      <!-- List -->
+      <div class="list-container" id="list-container">
+        <div class="empty-state" id="empty-state">
+          <div class="empty-icon">🛍️</div>
+          <p>Your list is empty.<br/>Add the first item above.</p>
+        </div>
+        <div id="items-list"></div>
+      </div>
+
+      <!-- Clear checked -->
+      <div class="list-actions" id="list-actions" style="display:none">
+        <button class="btn-clear" id="btn-clear">Clear checked items</button>
+      </div>
+    </main>
+
+    <!-- Confirm Modal -->
+    <div class="modal-overlay" id="modal-overlay" style="display:none">
+      <div class="modal">
+        <p class="modal-title">Clear checked items?</p>
+        <p class="modal-body">This will remove all checked items from the list.</p>
+        <div class="modal-actions">
+          <button class="btn-cancel" id="modal-cancel">Cancel</button>
+          <button class="btn-confirm" id="modal-confirm">Yes, clear them</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="app.js"></script>
+</body>
+</html>
