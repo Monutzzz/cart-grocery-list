@@ -4,8 +4,8 @@
 
 // ── SUPABASE CONFIG ──────────────────────────
 // Replace these with your actual Supabase credentials
-const SUPABASE_URL = 'YOUR_SUPABASE_URL';
-const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+const SUPABASE_URL = 'https://zkhkfusorbpylasmitrd.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_HvLXlmdn3sHNyqkmyFwNnw_xNCipFUl';
 
 const { createClient } = supabase;
 const db = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
