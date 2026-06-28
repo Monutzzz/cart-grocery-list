@@ -1,6 +1,5 @@
 /* =============================================
-   CART — Shared Grocery List
-   Design: Clean, minimal, mobile-first
+   CART v2 — Shared Grocery List
    ============================================= */
 
 :root {
@@ -11,25 +10,22 @@
   --text-secondary: #6B7280;
   --text-muted: #9CA3AF;
 
-  /* Store colors — subtle, not loud */
-  --frys:    #1A6B3C;
-  --frys-bg: #EAF4EF;
-  --costco:  #0052A5;
-  --costco-bg: #EAF1FB;
-  --sams:    #0071CE;
-  --sams-bg: #EAF3FD;
-  --walmart: #FFC220;
-  --walmart-bg: #FFF8E6;
-  --other:   #7C6AE8;
-  --other-bg: #F0EEFB;
+  --frys:       #1A6B3C; --frys-bg:    #EAF4EF;
+  --costco:     #0052A5; --costco-bg:  #EAF1FB;
+  --sams:       #0071CE; --sams-bg:    #EAF3FD;
+  --walmart:    #FFC220; --walmart-bg: #FFF8E6;
+  --target:     #CC0000; --target-bg:  #FDEAEA;
+  --other:      #7C6AE8; --other-bg:   #F0EEFB;
+  --custom:     #E87C3E; --custom-bg:  #FDF0EA;
 
   --checked-text: #B0B7C3;
   --danger: #E53E3E;
   --ai-color: #7C6AE8;
+  --or-color: #E87C3E;
 
   --radius: 12px;
   --radius-sm: 8px;
-  --shadow: 0 1px 3px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.05);
+  --shadow: 0 1px 3px rgba(0,0,0,0.07);
   --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
 }
 
@@ -61,26 +57,32 @@ header {
   justify-content: space-between;
 }
 
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
+.logo { display: flex; align-items: center; gap: 8px; }
 .logo-icon { font-size: 20px; }
-
 .logo-text {
   font-family: 'DM Sans', sans-serif;
   font-weight: 700;
   font-size: 20px;
   letter-spacing: -0.3px;
-  color: var(--text-primary);
 }
 
-.header-meta {
+.header-right { display: flex; align-items: center; gap: 10px; }
+
+.btn-add-store {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 5px 12px;
   font-size: 12px;
-  color: var(--text-muted);
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.15s;
 }
+.btn-add-store:hover { border-color: #9CA3AF; color: var(--text-primary); }
+
+.header-meta { font-size: 12px; color: var(--text-muted); }
 
 /* ─── STORE TABS ─────────────────────────── */
 .store-tabs {
@@ -96,7 +98,6 @@ header {
   top: 53px;
   z-index: 99;
 }
-
 .store-tabs::-webkit-scrollbar { display: none; }
 
 .tab {
@@ -112,19 +113,17 @@ header {
   transition: all 0.15s ease;
   font-family: 'Inter', sans-serif;
 }
-
 .tab:hover { background: var(--bg); color: var(--text-primary); }
-
 .tab.active { background: var(--text-primary); color: #fff; }
-
-/* Store-colored active tabs */
 .tab--frys.active    { background: var(--frys); }
 .tab--costco.active  { background: var(--costco); }
 .tab--sams.active    { background: var(--sams); }
 .tab--walmart.active { background: #D4A017; color: #1A1D23; }
+.tab--target.active  { background: var(--target); }
 .tab--other.active   { background: var(--other); }
+.tab--custom.active  { background: var(--custom); }
 
-/* ─── MAIN CONTENT ───────────────────────── */
+/* ─── MAIN ───────────────────────────────── */
 main {
   max-width: 640px;
   margin: 0 auto;
@@ -141,10 +140,7 @@ main {
   margin-bottom: 12px;
 }
 
-.input-row {
-  display: flex;
-  gap: 8px;
-}
+.input-row { display: flex; gap: 8px; }
 
 #item-input {
   flex: 1;
@@ -158,7 +154,6 @@ main {
   outline: none;
   transition: border-color 0.15s;
 }
-
 #item-input:focus { border-color: #9CA3AF; background: #fff; }
 
 .btn-add {
@@ -173,17 +168,10 @@ main {
   font-family: 'Inter', sans-serif;
   transition: opacity 0.15s;
 }
-
 .btn-add:hover { opacity: 0.85; }
 
 /* ─── SUGGESTIONS ────────────────────────── */
-.suggestions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 8px;
-}
-
+.suggestions { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
 .suggestion-chip {
   background: var(--bg);
   border: 1px solid var(--border);
@@ -194,7 +182,6 @@ main {
   cursor: pointer;
   transition: all 0.15s;
 }
-
 .suggestion-chip:hover { border-color: #9CA3AF; color: var(--text-primary); }
 
 /* ─── ITEM DETAILS ───────────────────────── */
@@ -211,11 +198,8 @@ main {
   flex-wrap: wrap;
 }
 
-.field-group {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
+.field-group { display: flex; flex-direction: column; gap: 4px; }
+.field-group.full-width { width: 100%; }
 
 .field-group label {
   font-size: 11px;
@@ -223,9 +207,12 @@ main {
   color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.field-group select {
+.field-group select, .edit-input {
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   padding: 8px 10px;
@@ -235,6 +222,7 @@ main {
   background: var(--bg);
   outline: none;
   cursor: pointer;
+  width: 100%;
 }
 
 .qty-group { flex-shrink: 0; }
@@ -242,7 +230,6 @@ main {
 .qty-control {
   display: flex;
   align-items: center;
-  gap: 0;
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   overflow: hidden;
@@ -262,24 +249,29 @@ main {
   align-items: center;
   justify-content: center;
 }
-
 .qty-btn:hover { background: var(--border); }
-
-#qty-display {
+#qty-display, #edit-qty-display {
   min-width: 28px;
   text-align: center;
   font-size: 14px;
   font-weight: 600;
 }
 
-/* ─── NOTE FIELD ─────────────────────────── */
-.note-row {
-  margin-top: 10px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+/* ─── OR ROW ─────────────────────────────── */
+.or-row { margin-top: 10px; }
+.or-toggle {
+  border: none;
+  background: none;
+  color: var(--or-color);
+  font-size: 12px;
+  cursor: pointer;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
 }
+.or-toggle:hover { opacity: 0.8; }
 
+/* ─── NOTE ROW ───────────────────────────── */
+.note-row { margin-top: 8px; display: flex; align-items: center; gap: 8px; }
 .note-toggle {
   border: none;
   background: none;
@@ -290,9 +282,7 @@ main {
   font-family: 'Inter', sans-serif;
   flex-shrink: 0;
 }
-
 .note-toggle:hover { color: var(--text-secondary); }
-
 #note-input {
   flex: 1;
   border: none;
@@ -313,7 +303,6 @@ main {
   margin-bottom: 10px;
   padding: 0 2px;
 }
-
 .ai-badge {
   background: var(--ai-color);
   color: #fff;
@@ -323,31 +312,14 @@ main {
   border-radius: 4px;
   letter-spacing: 0.5px;
 }
-
-#ai-hint-text {
-  font-size: 12px;
-  color: var(--text-muted);
-}
+#ai-hint-text { font-size: 12px; color: var(--text-muted); }
 
 /* ─── LIST ───────────────────────────────── */
-.list-container { margin-top: 4px; }
-
-.empty-state {
-  text-align: center;
-  padding: 48px 0;
-  color: var(--text-muted);
-}
-
+.empty-state { text-align: center; padding: 48px 0; color: var(--text-muted); }
 .empty-icon { font-size: 36px; margin-bottom: 10px; }
+.empty-state p { font-size: 14px; line-height: 1.6; }
 
-.empty-state p {
-  font-size: 14px;
-  line-height: 1.6;
-}
-
-/* Category group */
 .category-group { margin-bottom: 8px; }
-
 .category-label {
   font-size: 11px;
   font-weight: 600;
@@ -368,14 +340,11 @@ main {
   margin-bottom: 6px;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   transition: opacity 0.2s;
   box-shadow: var(--shadow);
 }
-
-.item-row.checked {
-  opacity: 0.55;
-}
+.item-row.checked { opacity: 0.5; }
 
 /* Store dot */
 .store-dot {
@@ -384,12 +353,13 @@ main {
   border-radius: 50%;
   flex-shrink: 0;
 }
-
 .store-dot.frys    { background: var(--frys); }
 .store-dot.costco  { background: var(--costco); }
 .store-dot.sams    { background: var(--sams); }
 .store-dot.walmart { background: var(--walmart); }
+.store-dot.target  { background: var(--target); }
 .store-dot.other   { background: var(--other); }
+.store-dot.custom  { background: var(--custom); }
 
 /* Checkbox */
 .item-check {
@@ -406,13 +376,11 @@ main {
   background: transparent;
   font-size: 12px;
 }
-
 .item-check:hover { border-color: #9CA3AF; }
 .item-check.checked { background: var(--text-primary); border-color: var(--text-primary); color: #fff; }
 
 /* Item info */
 .item-info { flex: 1; min-width: 0; }
-
 .item-name {
   font-size: 15px;
   font-weight: 500;
@@ -420,32 +388,9 @@ main {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.item-row.checked .item-name { text-decoration: line-through; color: var(--checked-text); }
 
-.item-row.checked .item-name {
-  text-decoration: line-through;
-  color: var(--checked-text);
-}
-
-.item-meta {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin-top: 2px;
-}
-
-.item-qty {
-  font-size: 12px;
-  color: var(--text-muted);
-}
-
-.item-note {
-  font-size: 11px;
-  color: var(--text-muted);
-  font-style: italic;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
+.item-meta { display: flex; align-items: center; gap: 6px; margin-top: 3px; flex-wrap: wrap; }
 
 .item-store-tag {
   font-size: 10px;
@@ -454,27 +399,37 @@ main {
   border-radius: 4px;
   flex-shrink: 0;
 }
-
 .item-store-tag.frys    { background: var(--frys-bg); color: var(--frys); }
 .item-store-tag.costco  { background: var(--costco-bg); color: var(--costco); }
 .item-store-tag.sams    { background: var(--sams-bg); color: var(--sams); }
 .item-store-tag.walmart { background: var(--walmart-bg); color: #9A7200; }
+.item-store-tag.target  { background: var(--target-bg); color: var(--target); }
 .item-store-tag.other   { background: var(--other-bg); color: var(--other); }
+.item-store-tag.custom  { background: var(--custom-bg); color: var(--custom); }
 
-/* Delete button */
-.item-delete {
+.or-divider {
+  font-size: 10px;
+  color: var(--or-color);
+  font-weight: 600;
+}
+
+.item-note { font-size: 11px; color: var(--text-muted); font-style: italic; }
+
+/* Item actions */
+.item-actions { display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
+
+.item-edit, .item-delete {
   background: none;
   border: none;
   color: var(--text-muted);
-  font-size: 16px;
+  font-size: 14px;
   cursor: pointer;
   padding: 4px;
   border-radius: 4px;
-  flex-shrink: 0;
   line-height: 1;
   transition: color 0.15s;
 }
-
+.item-edit:hover { color: var(--text-primary); }
 .item-delete:hover { color: var(--danger); }
 
 /* ─── LIST ACTIONS ───────────────────────── */
@@ -485,7 +440,6 @@ main {
   transform: translateX(-50%);
   z-index: 50;
 }
-
 .btn-clear {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -499,10 +453,9 @@ main {
   box-shadow: var(--shadow-md);
   transition: all 0.15s;
 }
-
 .btn-clear:hover { background: #FFF5F5; border-color: var(--danger); }
 
-/* ─── MODAL ──────────────────────────────── */
+/* ─── MODALS ─────────────────────────────── */
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -513,34 +466,21 @@ main {
   z-index: 200;
   padding: 20px;
 }
-
 .modal {
   background: var(--surface);
   border-radius: var(--radius);
   padding: 24px;
-  max-width: 320px;
+  max-width: 340px;
   width: 100%;
   box-shadow: var(--shadow-md);
+  max-height: 90vh;
+  overflow-y: auto;
 }
+.modal-title { font-size: 16px; font-weight: 600; margin-bottom: 6px; }
+.modal-body { font-size: 14px; color: var(--text-secondary); margin-bottom: 20px; line-height: 1.5; }
+.modal-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 20px; }
 
-.modal-title {
-  font-size: 16px;
-  font-weight: 600;
-  margin-bottom: 6px;
-}
-
-.modal-body {
-  font-size: 14px;
-  color: var(--text-secondary);
-  margin-bottom: 20px;
-  line-height: 1.5;
-}
-
-.modal-actions {
-  display: flex;
-  gap: 8px;
-  justify-content: flex-end;
-}
+.edit-fields { display: flex; flex-direction: column; gap: 12px; }
 
 .btn-cancel {
   background: var(--bg);
@@ -552,11 +492,10 @@ main {
   cursor: pointer;
   color: var(--text-secondary);
 }
-
 .btn-cancel:hover { background: var(--border); }
 
 .btn-confirm {
-  background: var(--danger);
+  background: var(--text-primary);
   border: none;
   border-radius: var(--radius-sm);
   padding: 9px 16px;
@@ -566,8 +505,28 @@ main {
   color: #fff;
   cursor: pointer;
 }
-
 .btn-confirm:hover { opacity: 0.85; }
+
+.remove-or {
+  background: none;
+  border: none;
+  color: var(--danger);
+  font-size: 11px;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  padding: 0;
+}
+
+#new-store-input {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 8px 10px;
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  width: 100%;
+  outline: none;
+  background: var(--bg);
+}
 
 /* ─── RESPONSIVE ─────────────────────────── */
 @media (max-width: 480px) {
